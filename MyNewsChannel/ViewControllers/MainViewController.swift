@@ -81,32 +81,32 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
-    func addTransparentView() {
-        let window = UIApplication.shared.keyWindow
-        transparentView.frame = window?.frame ?? self.view.frame
-        view.addSubview(transparentView)
-        
-        themeTableView.frame = CGRect(x: 0, y: 0, width: 250, height: 0)
-        view.addSubview(themeTableView)
-        themeTableView.layer.cornerRadius = 5
-        
-        transparentView.backgroundColor = .black.withAlphaComponent(0.9)
-        
-        let tapgesture = UITapGestureRecognizer(target: self, action: #selector(removeTransparentView))
-        transparentView.addGestureRecognizer(tapgesture)
-        transparentView.alpha = 0
-        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
-            self.transparentView.alpha = 0.5
-            self.themeTableView.frame = CGRect(x: 20, y: 0, width: 250, height: 400)
-        }, completion: nil)
-    }
-    
-    @objc func removeTransparentView() {
-        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
-            self.transparentView.alpha = 0
-            self.themeTableView.frame = CGRect(x: 20, y: 0, width: 250, height: 0)
-    }, completion: nil)
-                       }
+//    func addTransparentView() {
+//        let window = UIApplication.shared.keyWindow
+//        transparentView.frame = window?.frame ?? self.view.frame
+//        view.addSubview(transparentView)
+//
+//        themeTableView.frame = CGRect(x: 0, y: 0, width: 250, height: 0)
+//        view.addSubview(themeTableView)
+//        themeTableView.layer.cornerRadius = 5
+//
+//        transparentView.backgroundColor = .black.withAlphaComponent(0.9)
+//
+//        let tapgesture = UITapGestureRecognizer(target: self, action: #selector(removeTransparentView))
+//        transparentView.addGestureRecognizer(tapgesture)
+//        transparentView.alpha = 0
+//        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
+//            self.transparentView.alpha = 0.5
+//            self.themeTableView.frame = CGRect(x: 20, y: 0, width: 250, height: 400)
+//        }, completion: nil)
+//    }
+//
+//    @objc func removeTransparentView() {
+//        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
+//            self.transparentView.alpha = 0
+//            self.themeTableView.frame = CGRect(x: 20, y: 0, width: 250, height: 0)
+//    }, completion: nil)
+//                       }
     
     
                        
@@ -153,7 +153,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
                        
                        @objc func lineLeftButtonTapped() {
-                           addTransparentView()
+//                           addTransparentView()
         }
                        
                        @objc func backbuttonTapped() {
