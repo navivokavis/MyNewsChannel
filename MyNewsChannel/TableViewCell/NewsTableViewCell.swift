@@ -16,11 +16,10 @@ class NewsTableViewCell: UITableViewCell {
     private let colorLineView = UIView()
     private let publishedDateLabel = UILabel()
     var newsTitleView = UIView()
-    var currentPublishedDate = 0
+//    var currentPublishedDate = 0
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
         contentView.addSubview(newsSubtitleLabel)
         contentView.addSubview(newsImageView)
         contentView.addSubview(colorLineView)
@@ -28,8 +27,6 @@ class NewsTableViewCell: UITableViewCell {
         contentView.addSubview(newsTitleView)
         contentView.addSubview(newsTitleLabel)
     }
-    
-    
     
     required init?(coder: NSCoder) {
         fatalError()
@@ -67,14 +64,12 @@ class NewsTableViewCell: UITableViewCell {
         colorLineView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0).isActive = true
         colorLineView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0).isActive = true
         colorLineView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        //        colorLineView.widthAnchor.constraint(equalTo: contentView.widthAnchor).isActive = true
         
         newsImageView.translatesAutoresizingMaskIntoConstraints = false
         newsImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
         newsImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -120).isActive = true
         newsImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
         newsImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5).isActive = true
-//        newsImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         newsImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
         
         newsTitleView.translatesAutoresizingMaskIntoConstraints = false
@@ -82,7 +77,6 @@ class NewsTableViewCell: UITableViewCell {
         newsTitleView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -120).isActive = true
         newsTitleView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
         newsTitleView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5).isActive = true
-//        newsTitleView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         newsTitleView.widthAnchor.constraint(equalToConstant: 150).isActive = true
         
         newsTitleLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -90,42 +84,21 @@ class NewsTableViewCell: UITableViewCell {
         newsTitleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -120).isActive = true
         newsTitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15).isActive = true
         newsTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15).isActive = true
-//        newsTitleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         newsTitleLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
         
-//        newsTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-//        newsTitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-//        newsTitleLabel.rightAnchor.constraint(equalTo: newsImageView.leftAnchor, constant: -5).isActive = true
-//        newsTitleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 5).isActive = true
-//        newsTitleLabel.heightAnchor.constraint(equalToConstant: 70).isActive = true
-        
-//        newsSubtitleLabel.translatesAutoresizingMaskIntoConstraints = false
-//        newsSubtitleLabel.topAnchor.constraint(equalTo: newsTitleLabel.bottomAnchor, constant: -0) .isActive = true
-//        newsSubtitleLabel.rightAnchor.constraint(equalTo: newsImageView.leftAnchor, constant: -5).isActive = true
-//        newsSubtitleLabel.leftAnchor.constraint(equalTo: contentView.leftAnchor, constant: 5).isActive = true
-//        newsSubtitleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         newsSubtitleLabel.translatesAutoresizingMaskIntoConstraints = false
         newsSubtitleLabel.topAnchor.constraint(equalTo: newsTitleLabel.bottomAnchor, constant: 10).isActive = true
         newsSubtitleLabel.bottomAnchor.constraint(equalTo: publishedDateLabel.topAnchor, constant: -10).isActive = true
         newsSubtitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15).isActive = true
         newsSubtitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15).isActive = true
-//        newsSubtitleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         newsSubtitleLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
         
-//        publishedDateLabel.translatesAutoresizingMaskIntoConstraints = false
-//        //        publishedDateLabel.heightAnchor.constraint(equalToConstant: 1).isActive = true
-//        publishedDateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0).isActive = true
-//        publishedDateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0).isActive = true
-//        publishedDateLabel.bottomAnchor.constraint(equalTo: colorLineView.bottomAnchor, constant: -4) .isActive = true
         publishedDateLabel.translatesAutoresizingMaskIntoConstraints = false
         publishedDateLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
-//        publishedDateLabel.topAnchor.constraint(equalTo: newsTitleLabel.bottomAnchor, constant: 10).isActive = true
         publishedDateLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5).isActive = true
         publishedDateLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15).isActive = true
         publishedDateLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15).isActive = true
-//        newsSubtitleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         publishedDateLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
-        
         
     }
     

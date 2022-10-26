@@ -7,12 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F05FEDD229084B0000268479 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05FEDD129084B0000268479 /* SplashView.swift */; };
 		F087C28928FF1CF800310A38 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = F087C28828FF1CF800310A38 /* Models.swift */; };
 		F087C29A290049F800310A38 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F087C299290049F800310A38 /* Constant.swift */; };
-		F087C29C2901514200310A38 /* TopNewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F087C29B2901514200310A38 /* TopNewsTableViewCell.swift */; };
-		F0884E3D290273C700DD17C5 /* ThemesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0884E3C290273C700DD17C5 /* ThemesView.swift */; };
 		F0884E452904944300DD17C5 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0884E442904944300DD17C5 /* SplashViewController.swift */; };
-		F0884E472904986F00DD17C5 /* SplashPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0884E462904986F00DD17C5 /* SplashPresenter.swift */; };
 		F0884E4A29056CB300DD17C5 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0884E4929056CB300DD17C5 /* SearchViewController.swift */; };
 		F0B65D3528FE88250087E6ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B65D3428FE88250087E6ED /* AppDelegate.swift */; };
 		F0B65D3728FE88250087E6ED /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B65D3628FE88250087E6ED /* SceneDelegate.swift */; };
@@ -26,12 +24,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F05FEDD129084B0000268479 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		F087C28828FF1CF800310A38 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		F087C299290049F800310A38 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
-		F087C29B2901514200310A38 /* TopNewsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopNewsTableViewCell.swift; sourceTree = "<group>"; };
-		F0884E3C290273C700DD17C5 /* ThemesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemesView.swift; sourceTree = "<group>"; };
 		F0884E442904944300DD17C5 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
-		F0884E462904986F00DD17C5 /* SplashPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashPresenter.swift; sourceTree = "<group>"; };
 		F0884E4929056CB300DD17C5 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		F0B65D3128FE88250087E6ED /* MyNewsChannel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyNewsChannel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0B65D3428FE88250087E6ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +53,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F05FEDD3290859B100268479 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F05FEDD129084B0000268479 /* SplashView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F05FEDD4290859CE00268479 /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				F087C299290049F800310A38 /* Constant.swift */,
+			);
+			path = Constant;
+			sourceTree = "<group>";
+		};
 		F087C28A28FF27A200310A38 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -68,10 +80,8 @@
 		F087C28B28FF27B500310A38 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				F0884E3C290273C700DD17C5 /* ThemesView.swift */,
 				F0B65D3828FE88250087E6ED /* MainViewController.swift */,
 				F0884E4929056CB300DD17C5 /* SearchViewController.swift */,
-				F087C299290049F800310A38 /* Constant.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -96,7 +106,6 @@
 			isa = PBXGroup;
 			children = (
 				F0B65D4C28FEC6AE0087E6ED /* NewsTableViewCell.swift */,
-				F087C29B2901514200310A38 /* TopNewsTableViewCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -105,7 +114,6 @@
 			isa = PBXGroup;
 			children = (
 				F0884E442904944300DD17C5 /* SplashViewController.swift */,
-				F0884E462904986F00DD17C5 /* SplashPresenter.swift */,
 			);
 			path = Splash;
 			sourceTree = "<group>";
@@ -130,13 +138,15 @@
 			isa = PBXGroup;
 			children = (
 				F0B65D3428FE88250087E6ED /* AppDelegate.swift */,
-				F0884E482904988C00DD17C5 /* Splash */,
 				F0B65D3628FE88250087E6ED /* SceneDelegate.swift */,
+				F05FEDD4290859CE00268479 /* Constant */,
+				F0884E482904988C00DD17C5 /* Splash */,
 				F087C28E28FF281900310A38 /* TableViewCell */,
-				F087C28C28FF27CA00310A38 /* API */,
 				F087C28B28FF27B500310A38 /* ViewControllers */,
+				F05FEDD3290859B100268479 /* Views */,
 				F087C28A28FF27A200310A38 /* Models */,
 				F087C28D28FF27D700310A38 /* Extension */,
+				F087C28C28FF27CA00310A38 /* API */,
 				F0B65D3A28FE88250087E6ED /* Main.storyboard */,
 				F0B65D3D28FE88270087E6ED /* Assets.xcassets */,
 				F0B65D3F28FE88270087E6ED /* LaunchScreen.storyboard */,
@@ -218,17 +228,15 @@
 			files = (
 				F0884E4A29056CB300DD17C5 /* SearchViewController.swift in Sources */,
 				F0B65D3928FE88250087E6ED /* MainViewController.swift in Sources */,
-				F0884E472904986F00DD17C5 /* SplashPresenter.swift in Sources */,
 				F0B65D3528FE88250087E6ED /* AppDelegate.swift in Sources */,
 				F0B65D4D28FEC6AE0087E6ED /* NewsTableViewCell.swift in Sources */,
 				F087C29A290049F800310A38 /* Constant.swift in Sources */,
-				F0884E3D290273C700DD17C5 /* ThemesView.swift in Sources */,
 				F0884E452904944300DD17C5 /* SplashViewController.swift in Sources */,
 				F0B65D3728FE88250087E6ED /* SceneDelegate.swift in Sources */,
 				F087C28928FF1CF800310A38 /* Models.swift in Sources */,
+				F05FEDD229084B0000268479 /* SplashView.swift in Sources */,
 				F0B65D4B28FEB46E0087E6ED /* APICaller.swift in Sources */,
 				F0B65D4928FE8AAE0087E6ED /* Extension + ViewController.swift in Sources */,
-				F087C29C2901514200310A38 /* TopNewsTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

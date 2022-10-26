@@ -10,7 +10,6 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
-//    var splashPresenter: SplashPresenterDescription? = SplashPresenter()
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -18,22 +17,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let windowScene = (scene as? UIWindowScene) else { return }
         let window = UIWindow(windowScene: windowScene)
-        
-//         создаю окно, которое находится на 1 уровень выше главного окна приложения
-        
-//        splashPresenter?.present()
-        
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//                    self.splashPresenter?.dismiss(completion: { [weak self] in
-//                        self?.splashPresenter = nil
-//                    })
                     
-        window.rootViewController = SplashViewController()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-            window.rootViewController = UINavigationController(rootViewController: MainViewController() )
-
-        }
-//        window.rootViewController = UINavigationController(rootViewController: MainViewController() )
+        window.rootViewController = UINavigationController(rootViewController: MainViewController() )
+        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+//            window.rootViewController = UINavigationController(rootViewController: MainViewController() )
+//        }
+        
         window.makeKeyAndVisible()
         self.window = window
         

@@ -9,6 +9,7 @@ import UIKit
 
 class SearchViewController: UIViewController, UISearchBarDelegate {
     
+    // объявил замыкание
     public var completion: ((String) -> Void)?
     private var viewModels = [NewsTableViewCellViewModel]()
     private var articles = [Article]()
@@ -22,19 +23,14 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         title = "Search"
         
         navigationItem.searchController = searchController
-        searchController.searchBar.delegate = self
         navigationController?.navigationBar.barStyle = .black
-        //        navigationItem.titleView = searchBar
         
+        searchController.searchBar.delegate = self
         searchBar.showsCancelButton = true
-        //        searchBar.searchTextField.addTarget(self, action: #selector(searchTapped), for: .touchUpInside)
-        
         searchBar.becomeFirstResponder()
-        
-        
-        
     }
     
+    //MARK: - Search
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print(searchText)
     }
@@ -44,46 +40,11 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         return true
     }
     
-    
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
-        DispatchQueue.main.async {
-            self.txt = searchBar.searchTextField.text!
-            self.completion?(self.txt)
-        }
-       
-//        searhNewsByWord(title: txt)
+        // отправляю замыкание
+        self.txt = searchBar.searchTextField.text!
+        self.completion?(self.txt)
         self.navigationController?.popViewController(animated: true)
     }
-    
-//    func searhNewsByWord(title: String) {
-//        APICaller.shared.searchStories(title: title){ [weak self] result in
-//
-//            switch result {
-//            case.success(let articles):
-//                self?.articles = articles
-//                self?.viewModels = articles.compactMap({
-//                    NewsTableViewCellViewModel(
-//                        title: $0.title,
-//                        subtitle: $0.description ?? "No Description",
-//                        imageURL: URL(string: $0.urlToImage ?? ""),//может сюда вставляется дефолтная картинка?
-//                        published: $0.publishedAt
-//                    )
-//                })
-//
-//                DispatchQueue.main.async {
-//                    print("HOGFKKERFOFKWOFKPWE!!!!!!!!!!!!!!2131231414")
-//                    MainViewController().newsTableView.reloadData()
-//                    MainViewController().title = "\(title) news"
-//                    MainViewController().backbutton.customView?.isHidden = false
-//                }
-//
-//            case.failure( let error ):
-//                print("I have Error \(error)")
-//            }
-//        }
-//    }
-    
-    
-    
     
 }

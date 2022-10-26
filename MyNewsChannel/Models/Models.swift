@@ -27,30 +27,6 @@ class NewsTableViewCellViewModel {
     }
 }
 
-//class TopNewsTableViewCellViewModel {
-//    let title: String
-//    let subtitle: String
-//    let imageURL: URL?
-//    var imageData: Data? = nil
-//    var published: String
-//
-//    init(
-//        title: String,
-//        subtitle: String,
-//        imageURL: URL?,
-//        published: String
-//    ) {
-//        self.title = title
-//        self.subtitle = subtitle
-//        self.imageURL = imageURL
-//        self.published = published
-//    }
-//}
-//struct Constans {
-//    static let topHeadlinesURL = URL(string: "https://newsapi.org/v2/top-headlines?country=us&apiKey=7e19dda7c07f4af18ada19f113022fcd")
-//    
-//}
-
 struct APIResponse: Codable {
     let articles: [Article]
 }
@@ -66,4 +42,45 @@ struct Article: Codable {
 
 struct Source: Codable {
     
+}
+
+enum NewsType: String, CaseIterable {
+    case ukraine = "Ukraine"
+    case war = "War"
+    case business = "Business"
+    case entertainment = "Entertainment"
+    case health = "Health"
+    case science = "Science"
+    case sports = "Sports"
+    case architecture = "Architecture"
+    case fashion = "Fashion"
+    case technology = "Technology"
+    case covid = "Covid-19"
+    
+    var systemName: String {
+        switch self {
+        case .ukraine:
+            return "bolt.fill"
+        case .war:
+            return "multiply.square.fill"
+        case .business:
+            return "briefcase"
+        case .entertainment:
+            return "film"
+        case .health:
+            return "stethoscope"
+        case .science:
+            return "function"
+        case .sports:
+            return "sportscourt"
+        case .architecture:
+            return "building.2"
+        case .technology:
+            return "gear"
+        case .fashion:
+            return "crown"
+        case .covid:
+            return "stethoscope"
+        }
+    }
 }

@@ -8,7 +8,6 @@
 import UIKit
 import SafariServices
 
-
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let newsTableView = UITableView()
@@ -17,11 +16,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     var searchRightButton = UIBarButtonItem()
     var lineLeftButton = UIBarButtonItem()
     var backbutton = UIBarButtonItem()
-    let darkBacgroundView = UIView()
-    let transparentView = ThemesView()
-    //    let themeTableView = UITableView()
-    //    var dataSource = [String]()
-    let vc = SearchViewController()
+    var splashView = SplashView()
     
     //создаю меню
     var categoryMenu: UIMenu {
@@ -35,19 +30,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         return UIMenu(title: "Change Category", children: menuActions)
     }
     
-    //    override func viewWillAppear(_ animated: Bool) {
-    //        present(SplashViewController(), animated: true)
-    //    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
-        
-        vc.completion = { [weak self] text in
-            guard let self = self else { return }
-                    self.searhNewsByWord(title: text)
-                    print("!@UASKLFHASOKFJASLKFHJASLJDHWJKQGEOI!EH(IUOPHNASLJKFH")
-                }
     }
     
     func setup() {
@@ -58,13 +44,16 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func buildHierarchy() {
         view.addSubview(newsTableView)
+        view.addSubview(splashView)
     }
     
     func configureSubviews() {
         title = "Top Rated News"
         
         self.navigationController?.setupNavigationController()
+//        self.navigationController?.navigationBar.isHidden = true
         self.navigationController!.navigationBar.tintColor = .white
+        self.navigationController?.navigationBar.alpha = 0
         
         searchRightButton = createCustomBarButton(imageName: "magnifyingglass", selector: #selector(searchRightButtonTapped))
         lineLeftButton = UIBarButtonItem(systemItem: .bookmarks, primaryAction: nil, menu: categoryMenu)
@@ -78,6 +67,29 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         newsTableView.delegate = self
         newsTableView.dataSource = self
         
+        apicaller()
+        
+        UIView.animate(withDuration: 1, delay: 2.5) {
+            self.splashView.alpha = 0
+            self.navigationController?.navigationBar.alpha = 1
+        }
+    }
+    
+    func layoutSubviews() {
+        splashView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        splashView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        splashView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        splashView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        newsTableView.frame = view.bounds
+    }
+    
+    //MARK: - API CALLER
+    
+    func apicaller() {
         APICaller.shared.getTopStories{ [weak self] result in
             switch result {
             case.success(let articles):
@@ -90,71 +102,27 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                         published: $0.publishedAt
                     )
                 })
-                
                 DispatchQueue.main.async {
                     self?.newsTableView.reloadData()
                 }
-                
             case.failure( let error ):
                 print("I have Error \(error)")
             }
         }
-        
-       
     }
-    
-//    func addTransparentView() {
-//        let window = UIApplication.shared.keyWindow
-//        darkBacgroundView.frame = window?.frame ?? self.view.frame
-//        view.addSubview(darkBacgroundView)
-//
-//        transparentView.frame = CGRect(x: 0, y: 150, width: 300, height: 0)
-//        view.addSubview(transparentView)
-//        transparentView.layer.cornerRadius = 20
-//
-//        darkBacgroundView.backgroundColor = .black.withAlphaComponent(0.9)
-//
-//        let tapgesture = UITapGestureRecognizer(target: self, action: #selector(removeTransparentView))
-//        darkBacgroundView.addGestureRecognizer(tapgesture)
-//        darkBacgroundView.alpha = 0
-//        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
-//            self.darkBacgroundView.alpha = 0.5
-//            self.transparentView.frame = CGRect(x: 20, y: 150, width: 300, height: CGFloat(self.transparentView.dataSource.count * 40))
-//            self.transparentView.alpha = 0.9
-//        }, completion: nil)
-//
-//        // здесь я реализую замыкания
-//        transparentView.typeSelect = { [weak self] type in
-//            print(type)
-//            self?.searhNewsByType(type: type)
-//            self!.removeTransparentView()
-//        }
-//    }
-//
-//    @objc func removeTransparentView() {
-//        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 1.0, initialSpringVelocity: 1.0, options: .curveEaseInOut, animations: {
-//            self.darkBacgroundView.alpha = 0
-//            self.transparentView.frame = CGRect(x: 20, y: 150, width: 300, height: 0)
-//        }, completion: nil)
-//    }
-    
-    
-    
-    func layoutSubviews() {
-        
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        newsTableView.frame = view.bounds
-    }
-    
     
     //MARK: - Search Button Tapped
+    
     @objc func searchRightButtonTapped() {
-        self.navigationController?.pushViewController(SearchViewController(), animated: true)
+        let vc = SearchViewController()
         
-        //здерь реализован метод поиска через ALERT CONTROLLER
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+        vc.completion = { [weak self] text in
+            guard let self = self else { return }
+            self.searhNewsByWord(title: text)
+        }
+        // здерь реализован метод поиска через ALERT CONTROLLER
         
         //        presentSearchAlertController(withTitle: "Search", message: "with keyword", style: .alert) { [weak self] keyWord in
         //            APICaller.shared.searchStories(title: keyWord){ [weak self] result in
@@ -166,7 +134,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         //                        NewsTableViewCellViewModel(
         //                            title: $0.title,
         //                            subtitle: $0.description ?? "No Description",
-        //                            imageURL: URL(string: $0.urlToImage ?? ""),//может сюда вставляется дефолтная картинка?
+        //                            imageURL: URL(string: $0.urlToImage ?? ""),
         //                            published: $0.publishedAt
         //                        )
         //                    })
@@ -183,67 +151,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         //        }
     }
     
-    func searhNewsByWord(title: String) {
-        
-        APICaller.shared.searchStories(title: title){ [weak self] result in
-            switch result {
-            case.success(let articles):
-                self?.articles = articles
-                self?.viewModels = articles.compactMap({
-                    NewsTableViewCellViewModel(
-                        title: $0.title,
-                        subtitle: $0.description ?? "No Description",
-                        imageURL: URL(string: $0.urlToImage ?? ""),//может сюда вставляется дефолтная картинка?
-                        published: $0.publishedAt
-                    )
-                })
-                
-                DispatchQueue.main.async {
-                    print("-123ggg------------HOGFKKERFOFKWOFKPWE!!!!!!!!!!!!!!2131231414")
-                    self?.newsTableView.reloadData()
-                    self?.title = "\(title) news"
-                    self?.backbutton.customView?.isHidden = false
-                }
-                
-            case.failure( let error ):
-                print("I have Error \(error)")
-            }
-        }
-    }
-    
-    func searhNewsByType(type: NewsType) {
-        APICaller.shared.searchStories(title: type.rawValue){ [weak self] result in
-            
-            switch result {
-            case.success(let articles):
-                self?.articles = articles
-                self?.viewModels = articles.compactMap({
-                    NewsTableViewCellViewModel(
-                        title: $0.title,
-                        subtitle: $0.description ?? "No Description",
-                        imageURL: URL(string: $0.urlToImage ?? ""),//может сюда вставляется дефолтная картинка?
-                        published: $0.publishedAt
-                    )
-                })
-                
-                DispatchQueue.main.async {
-                    self?.newsTableView.reloadData()
-                    self?.title = "\(type.rawValue) news"
-                    self?.backbutton.customView?.isHidden = false
-                }
-                
-            case.failure( let error ):
-                print("I have Error \(error)")
-            }
-        }
-    }
-    
-    @objc func lineLeftButtonTapped() {
-        //        addTransparentView()
-    }
+    //MARK: - Back Button Tapped
     
     @objc func backbuttonTapped() {
-        
         APICaller.shared.getTopStories{ [weak self] result in
             switch result {
             case.success(let articles):
@@ -256,24 +166,69 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                         published: $0.publishedAt
                     )
                 })
-                
                 DispatchQueue.main.async {
                     self?.newsTableView.reloadData()
                     self?.backbutton.customView?.isHidden = true
                     self?.title = "Top Rated News"
-                    
                 }
-                
             case.failure( let error ):
                 print("I have Error \(error)")
             }
         }
     }
     
+    //MARK: - Search functions
     
+    func searhNewsByWord(title: String) {
+        APICaller.shared.searchStories(title: title){ [weak self] result in
+            switch result {
+            case.success(let articles):
+                self?.articles = articles
+                self?.viewModels = articles.compactMap({
+                    NewsTableViewCellViewModel(
+                        title: $0.title,
+                        subtitle: $0.description ?? "No Description",
+                        imageURL: URL(string: $0.urlToImage ?? ""),//может сюда вставляется дефолтная картинка?
+                        published: $0.publishedAt
+                    )
+                })
+                DispatchQueue.main.async {
+                    self?.newsTableView.reloadData()
+                    self?.title = "\(title) news"
+                    self?.backbutton.customView?.isHidden = false
+                }
+            case.failure( let error ):
+                print("I have Error \(error)")
+            }
+        }
+    }
     
+    func searhNewsByType(type: NewsType) {
+        APICaller.shared.searchStories(title: type.rawValue){ [weak self] result in
+            switch result {
+            case.success(let articles):
+                self?.articles = articles
+                self?.viewModels = articles.compactMap({
+                    NewsTableViewCellViewModel(
+                        title: $0.title,
+                        subtitle: $0.description ?? "No Description",
+                        imageURL: URL(string: $0.urlToImage ?? ""),//может сюда вставляется дефолтная картинка?
+                        published: $0.publishedAt
+                    )
+                })
+                DispatchQueue.main.async {
+                    self?.newsTableView.reloadData()
+                    self?.title = "\(type.rawValue) news"
+                    self?.backbutton.customView?.isHidden = false
+                }
+            case.failure( let error ):
+                print("I have Error \(error)")
+            }
+        }
+    }
     
     //MARK: - TableView Delegate and DataSource
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModels.count
     }
