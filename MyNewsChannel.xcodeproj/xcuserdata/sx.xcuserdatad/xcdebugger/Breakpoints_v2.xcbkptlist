@@ -136,7 +136,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "954C2537-0BCA-4C21-B6C0-F14B552C210F"
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MyNewsChannel/API/APICaller.swift"
@@ -146,6 +146,53 @@
             endingLineNumber = "40"
             landmarkName = "searchStories(title:completion:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "954C2537-0BCA-4C21-B6C0-F14B552C210F - c0c414f4df4db7c8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MyNewsChannel.APICaller.searchStories(title: Swift.String, completion: (Swift.Result&lt;Swift.Array&lt;MyNewsChannel.Article&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "MyNewsChannel"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sx/Desktop/SWIFT_PROJECTS/MyNewsChannel/MyNewsChannel/API/APICaller.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
+                  offsetFromSymbolStart = "336">
+               </Location>
+               <Location
+                  uuid = "954C2537-0BCA-4C21-B6C0-F14B552C210F - c0c414f4df4db7c8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MyNewsChannel.APICaller.searchStories(title: Swift.String, completion: (Swift.Result&lt;Swift.Array&lt;MyNewsChannel.Article&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "MyNewsChannel"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sx/Desktop/SWIFT_PROJECTS/MyNewsChannel/MyNewsChannel/API/APICaller.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
+                  offsetFromSymbolStart = "952">
+               </Location>
+               <Location
+                  uuid = "954C2537-0BCA-4C21-B6C0-F14B552C210F - c0c414f4df4db7c8"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MyNewsChannel.APICaller.searchStories(title: Swift.String, completion: (Swift.Result&lt;Swift.Array&lt;MyNewsChannel.Article&gt;, Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "MyNewsChannel"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/sx/Desktop/SWIFT_PROJECTS/MyNewsChannel/MyNewsChannel/API/APICaller.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "40"
+                  endingLineNumber = "40"
+                  offsetFromSymbolStart = "1400">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -196,38 +243,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B6219FB5-B25C-4F6C-AE9D-B0BD341B7DAF"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MyNewsChannel/AppDelegate.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "21"
-            endingLineNumber = "21"
-            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "BA3F9872-DF59-4A50-99B1-82C4D6219468"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "MyNewsChannel/AppDelegate.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "application(_:didFinishLaunchingWithOptions:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "0F85651B-CD4E-4731-A495-25000D6C0585"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -254,6 +269,70 @@
             startingLineNumber = "33"
             endingLineNumber = "33"
             landmarkName = "present()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "54A85F8C-552B-4BA0-9C67-FD56CEB851DE"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyNewsChannel/Constant/Constant.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
+            landmarkName = "APIProperty"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3C142529-83C8-49A7-B15C-FE9295D82EA5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyNewsChannel/TableViewCell/NewsTableViewCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "layoutSubviews()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E4038056-82F9-4C1C-A0C8-78C421CC4064"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyNewsChannel/TableViewCell/FirstNewsTableViewCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "layoutSubviews()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5E51782F-2343-48FB-B109-34D2F75D2D34"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MyNewsChannel/TableViewCell/FirstNewsTableViewCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "47"
+            endingLineNumber = "47"
+            landmarkName = "layoutSubviews()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

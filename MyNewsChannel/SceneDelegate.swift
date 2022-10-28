@@ -20,10 +20,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                     
         window.rootViewController = UINavigationController(rootViewController: MainViewController() )
         
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
-//            window.rootViewController = UINavigationController(rootViewController: MainViewController() )
-//        }
-        
         window.makeKeyAndVisible()
         self.window = window
         

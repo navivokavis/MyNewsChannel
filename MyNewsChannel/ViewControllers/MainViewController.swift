@@ -16,20 +16,33 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     var searchRightButton = UIBarButtonItem()
     var lineLeftButton = UIBarButtonItem()
     var backbutton = UIBarButtonItem()
+    var setingsButton = UIBarButtonItem()
     var splashView = SplashView()
     
-    //создаю меню
+    //Create menu with ENUM
+//    var categoryMenu: UIMenu {
+//        let menuActions = NewsType.allCases.map({ (item) -> UIAction in
+//            let name = item.rawValue
+//            return UIAction(title: name.capitalized, image: UIImage(systemName: item.systemName)) { (_) in
+//                self.categoryMenu.image?.withTintColor(.white, renderingMode: .alwaysTemplate)
+//                self.searhNewsByType(type: item)
+//            }
+//        })
+//        return UIMenu(title: "Change Category", children: menuActions)
+//    }
+    
+    //Create menu with ARRAY
     var categoryMenu: UIMenu {
-        let menuActions = NewsType.allCases.map({ (item) -> UIAction in
-            let name = item.rawValue
-            return UIAction(title: name.capitalized, image: UIImage(systemName: item.systemName)) { (_) in
+        var menuActions: [UIAction] = []
+        for type in arrayWithTypes {
+            let action = UIAction(title: type.typeName.capitalized, image: UIImage(systemName: type.typeImage)) { (_) in
                 self.categoryMenu.image?.withTintColor(.white, renderingMode: .alwaysTemplate)
-                self.searhNewsByType(type: item)
+                self.searhNewsByType(type: type.typeName)
             }
-        })
+            menuActions.append(action)
+        }
         return UIMenu(title: "Change Category", children: menuActions)
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,18 +64,19 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         title = "Top Rated News"
         
         self.navigationController?.setupNavigationController()
-//        self.navigationController?.navigationBar.isHidden = true
         self.navigationController!.navigationBar.tintColor = .white
         self.navigationController?.navigationBar.alpha = 0
         
+        setingsButton = createCustomBarButton(imageName: "square.and.pencil", selector: #selector(setingsButtonTapped))
         searchRightButton = createCustomBarButton(imageName: "magnifyingglass", selector: #selector(searchRightButtonTapped))
         lineLeftButton = UIBarButtonItem(systemItem: .bookmarks, primaryAction: nil, menu: categoryMenu)
         backbutton = createCustomBarButton(imageName: "arrowshape.turn.up.backward", selector: #selector(backbuttonTapped))
         
-        navigationItem.rightBarButtonItem = searchRightButton
+        navigationItem.rightBarButtonItems = [searchRightButton, setingsButton]
         navigationItem.leftBarButtonItems = [lineLeftButton, backbutton]
         backbutton.customView?.isHidden = true
         
+        newsTableView.register(FirstNewsTableViewCell.self, forCellReuseIdentifier: FirstNewsTableViewCell.identifier)
         newsTableView.register(NewsTableViewCell.self, forCellReuseIdentifier: NewsTableViewCell.identifier)
         newsTableView.delegate = self
         newsTableView.dataSource = self
@@ -111,6 +125,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    //MARK: - Setings Button Tapped
+    @objc func setingsButtonTapped() {
+        let vc = SettingsViewController()
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     //MARK: - Search Button Tapped
     
     @objc func searchRightButtonTapped() {
@@ -122,7 +143,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             guard let self = self else { return }
             self.searhNewsByWord(title: text)
         }
-        // здерь реализован метод поиска через ALERT CONTROLLER
+        // here is metod with ALERT CONTROLLER
         
         //        presentSearchAlertController(withTitle: "Search", message: "with keyword", style: .alert) { [weak self] keyWord in
         //            APICaller.shared.searchStories(title: keyWord){ [weak self] result in
@@ -203,8 +224,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    func searhNewsByType(type: NewsType) {
-        APICaller.shared.searchStories(title: type.rawValue){ [weak self] result in
+    func searhNewsByType(type: String) {
+        APICaller.shared.searchStories(title: type){ [weak self] result in
             switch result {
             case.success(let articles):
                 self?.articles = articles
@@ -212,13 +233,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                     NewsTableViewCellViewModel(
                         title: $0.title,
                         subtitle: $0.description ?? "No Description",
-                        imageURL: URL(string: $0.urlToImage ?? ""),//может сюда вставляется дефолтная картинка?
+                        imageURL: URL(string: $0.urlToImage ?? ""),
                         published: $0.publishedAt
                     )
                 })
                 DispatchQueue.main.async {
                     self?.newsTableView.reloadData()
-                    self?.title = "\(type.rawValue) news"
+                    self?.title = "\(type) news"
                     self?.backbutton.customView?.isHidden = false
                 }
             case.failure( let error ):
@@ -234,15 +255,25 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        guard let cell = tableView.dequeueReusableCell(
-            withIdentifier: NewsTableViewCell.identifier,
-            for: indexPath)
-                as? NewsTableViewCell else {
+        if indexPath.row < 1 {
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: FirstNewsTableViewCell.identifier,
+                for: indexPath)
+            as? FirstNewsTableViewCell else {
             fatalError()
         }
         cell.configure(with:viewModels[indexPath.row])
         return cell
+    }
+            guard let cell = tableView.dequeueReusableCell(
+                withIdentifier: NewsTableViewCell.identifier,
+                for: indexPath)
+                    as? NewsTableViewCell else {
+                fatalError()
+            }
+            cell.configure(with:viewModels[indexPath.row])
+            return cell
+        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -256,7 +287,14 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 350
+        var heightForRow: CGFloat = 0
+        if indexPath.row < 1 {
+            heightForRow = 350
+        }
+        if indexPath.row > 1 {
+            heightForRow = 150
+        }
+        return heightForRow
     }
     
 }

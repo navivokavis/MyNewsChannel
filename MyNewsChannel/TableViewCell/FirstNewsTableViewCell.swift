@@ -1,26 +1,31 @@
 //
-//  NewsTableViewCell.swift
+//  FirstNewsTableViewCell.swift
 //  MyNewsChannel
 //
-//  Created by Navi Vokavis on 18.10.22.
+//  Created by Navi Vokavis on 27.10.22.
 //
 
 import UIKit
+import QuartzCore
 
-class NewsTableViewCell: UITableViewCell {
+class FirstNewsTableViewCell: UITableViewCell {
     
-    static let identifier = "NewsTableViewCell"
+    static let identifier = "FirstNewsTableViewCell"
     private let newsTitleLabel = UILabel()
+    private let newsSubtitleLabel = UILabel()
     private let newsImageView = UIImageView()
     private let colorLineView = UIView()
     private let publishedDateLabel = UILabel()
+    var newsTitleView = UIView()
 //    var currentPublishedDate = 0
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        contentView.addSubview(newsSubtitleLabel)
         contentView.addSubview(newsImageView)
         contentView.addSubview(colorLineView)
         contentView.addSubview(publishedDateLabel)
+        contentView.addSubview(newsTitleView)
         contentView.addSubview(newsTitleLabel)
     }
     
@@ -30,10 +35,18 @@ class NewsTableViewCell: UITableViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-            
-        newsTitleLabel.font = .systemFont(ofSize: 16, weight: .bold)
+        
+        newsTitleView.backgroundColor = .init(red: 0, green: 0, blue: 0, alpha: 0.7)
+        newsTitleView.layer.cornerRadius = 10
+        newsTitleView.layer.masksToBounds = true
+        
+        newsTitleLabel.font = .systemFont(ofSize: 24, weight: .semibold)
         newsTitleLabel.numberOfLines = 0
-        newsTitleLabel.textColor = .black
+        newsTitleLabel.textColor = .white
+        newsTitleLabel.textAlignment = .center
+
+        newsSubtitleLabel.font = .systemFont(ofSize: 17, weight: .light)
+        newsSubtitleLabel.numberOfLines = 0
         
         newsImageView.backgroundColor = .secondarySystemBackground
         newsImageView.contentMode = .scaleAspectFill
@@ -57,15 +70,31 @@ class NewsTableViewCell: UITableViewCell {
         
         newsImageView.translatesAutoresizingMaskIntoConstraints = false
         newsImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
-        newsImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10).isActive = true
+        newsImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -120).isActive = true
+        newsImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
         newsImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5).isActive = true
         newsImageView.widthAnchor.constraint(equalToConstant: 150).isActive = true
         
+        newsTitleView.translatesAutoresizingMaskIntoConstraints = false
+        newsTitleView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 130).isActive = true
+        newsTitleView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -120).isActive = true
+        newsTitleView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
+        newsTitleView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5).isActive = true
+        newsTitleView.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        
         newsTitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        newsTitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10).isActive = true
-        newsTitleLabel.bottomAnchor.constraint(equalTo: publishedDateLabel.topAnchor, constant: -10).isActive = true
-        newsTitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5).isActive = true
-        newsTitleLabel.trailingAnchor.constraint(equalTo: newsImageView.leadingAnchor, constant: -5).isActive = true
+        newsTitleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 130).isActive = true
+        newsTitleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -120).isActive = true
+        newsTitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15).isActive = true
+        newsTitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15).isActive = true
+        newsTitleLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        
+        newsSubtitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        newsSubtitleLabel.topAnchor.constraint(equalTo: newsTitleLabel.bottomAnchor, constant: 10).isActive = true
+        newsSubtitleLabel.bottomAnchor.constraint(equalTo: publishedDateLabel.topAnchor, constant: -10).isActive = true
+        newsSubtitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15).isActive = true
+        newsSubtitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15).isActive = true
+        newsSubtitleLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
         
         publishedDateLabel.translatesAutoresizingMaskIntoConstraints = false
         publishedDateLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
@@ -79,29 +108,15 @@ class NewsTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         newsTitleLabel.text = nil
-        newsImageView.image = UIImage(named: "loadImg")
+        newsSubtitleLabel.text = nil
+        newsImageView.image = UIImage(named: "NVNEWS")
         publishedDateLabel.text = nil
-    }
-    
-    func convertDateToString(stringDate: String) -> String {
-        
-        let formatter: ISO8601DateFormatter = .init()
-        
-        let rawDate = formatter.date(from: stringDate)
-        
-        let form: DateFormatter = .init()
-        form.dateFormat = "yyyy MMM dd HH:mm"
-        
-        let finalString = form.string(from: rawDate!)
-        
-        return finalString
     }
     
     func configure(with viewModel: NewsTableViewCellViewModel) {
         newsTitleLabel.text = viewModel.title
-//        publishedDateLabel.text = viewModel.published
-        publishedDateLabel.text = convertDateToString(stringDate: viewModel.published)
-        
+        newsSubtitleLabel.text = viewModel.subtitle
+//                publishedDateLabel.text = viewModel.published
         if let data = viewModel.imageData {
             newsImageView.image = UIImage(data: data)
         } else if let url = viewModel.imageURL {
