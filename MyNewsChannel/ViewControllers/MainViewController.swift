@@ -14,36 +14,41 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     private var viewModels = [NewsTableViewCellViewModel]()
     private var articles = [Article]()
     var searchRightButton = UIBarButtonItem()
-    var lineLeftButton = UIBarButtonItem()
+    var menuLeftButton = UIBarButtonItem()
     var backbutton = UIBarButtonItem()
     var setingsButton = UIBarButtonItem()
     var splashView = SplashView()
     
-    //Create menu with ENUM
-//    var categoryMenu: UIMenu {
-//        let menuActions = NewsType.allCases.map({ (item) -> UIAction in
-//            let name = item.rawValue
-//            return UIAction(title: name.capitalized, image: UIImage(systemName: item.systemName)) { (_) in
-//                self.categoryMenu.image?.withTintColor(.white, renderingMode: .alwaysTemplate)
-//                self.searhNewsByType(type: item)
-//            }
-//        })
-//        return UIMenu(title: "Change Category", children: menuActions)
-//    }
+    //Create UIMenu with ENUM
+    //    var categoryMenu: UIMenu {
+    //        let menuActions = NewsType.allCases.map({ (item) -> UIAction in
+    //            let name = item.rawValue
+    //            return UIAction(title: name.capitalized, image: UIImage(systemName: item.systemName)) { (_) in
+    //                self.categoryMenu.image?.withTintColor(.white, renderingMode: .alwaysTemplate)
+    //                self.searhNewsByType(type: item)
+    //            }
+    //        })
+    //        return UIMenu(title: "Change Category", children: menuActions)
+    //    }
     
-    //Create menu with ARRAY
-    var categoryMenu: UIMenu {
-        var menuActions: [UIAction] = []
-        for type in arrayWithTypes {
-            let action = UIAction(title: type.typeName.capitalized, image: UIImage(systemName: type.typeImage)) { (_) in
-                self.categoryMenu.image?.withTintColor(.white, renderingMode: .alwaysTemplate)
-                self.searhNewsByType(type: type.typeName)
-            }
-            menuActions.append(action)
-        }
-        return UIMenu(title: "Change Category", children: menuActions)
+    //Create UIMenu with ARRAY
+    //    var categoryMenu: UIMenu {
+    //        var menuActions: [UIAction] = []
+    //        for type in arrayWithTypes {
+    //            let action = UIAction(title: type.typeName.capitalized, image: UIImage(systemName: type.typeImage)) { (_) in
+    //                self.categoryMenu.image?.withTintColor(.white, renderingMode: .alwaysTemplate)
+    //                self.searhNewsByType(type: type.typeName)
+    //            }
+    //            menuActions.append(action)
+    //        }
+    //        return UIMenu(title: "Change Category", children: menuActions)
+    //    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        menuLeftButton.menu = setupUIMenu()
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -69,11 +74,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         setingsButton = createCustomBarButton(imageName: "square.and.pencil", selector: #selector(setingsButtonTapped))
         searchRightButton = createCustomBarButton(imageName: "magnifyingglass", selector: #selector(searchRightButtonTapped))
-        lineLeftButton = UIBarButtonItem(systemItem: .bookmarks, primaryAction: nil, menu: categoryMenu)
+        menuLeftButton = UIBarButtonItem(systemItem: .bookmarks, primaryAction: nil, menu: setupUIMenu())
         backbutton = createCustomBarButton(imageName: "arrowshape.turn.up.backward", selector: #selector(backbuttonTapped))
         
         navigationItem.rightBarButtonItems = [searchRightButton, setingsButton]
-        navigationItem.leftBarButtonItems = [lineLeftButton, backbutton]
+        navigationItem.leftBarButtonItems = [menuLeftButton, backbutton]
         backbutton.customView?.isHidden = true
         
         newsTableView.register(FirstNewsTableViewCell.self, forCellReuseIdentifier: FirstNewsTableViewCell.identifier)
@@ -125,7 +130,23 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    //MARK: - Create Menu
+    
+    func setupUIMenu() -> UIMenu {
+        let menu = UIMenu()
+        var menuActions: [UIAction] = []
+        for type in arrayWithTypes {
+            let action = UIAction(title: type.typeName.capitalized, image: UIImage(systemName: type.typeImage)) { (_) in
+                menu.image?.withTintColor(.white, renderingMode: .alwaysTemplate)
+                self.searhNewsByType(type: type.typeName)
+            }
+            menuActions.append(action)
+        }
+        return UIMenu(title: "Change Category", children: menuActions)
+    }
+    
     //MARK: - Setings Button Tapped
+    
     @objc func setingsButtonTapped() {
         let vc = SettingsViewController()
         
@@ -159,7 +180,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         //                            published: $0.publishedAt
         //                        )
         //                    })
-        //
         //                    DispatchQueue.main.async { [self]
         //                        self?.newsTableView.reloadData()
         //                        self?.title = "News with '\(keyWord)'"
@@ -259,20 +279,20 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             guard let cell = tableView.dequeueReusableCell(
                 withIdentifier: FirstNewsTableViewCell.identifier,
                 for: indexPath)
-            as? FirstNewsTableViewCell else {
-            fatalError()
-        }
-        cell.configure(with:viewModels[indexPath.row])
-        return cell
-    }
-            guard let cell = tableView.dequeueReusableCell(
-                withIdentifier: NewsTableViewCell.identifier,
-                for: indexPath)
-                    as? NewsTableViewCell else {
+                    as? FirstNewsTableViewCell else {
                 fatalError()
             }
             cell.configure(with:viewModels[indexPath.row])
             return cell
+        }
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: NewsTableViewCell.identifier,
+            for: indexPath)
+                as? NewsTableViewCell else {
+            fatalError()
+        }
+        cell.configure(with:viewModels[indexPath.row])
+        return cell
         
     }
     

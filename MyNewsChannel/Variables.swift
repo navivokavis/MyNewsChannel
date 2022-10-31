@@ -7,4 +7,7 @@
 
 import UIKit
 
+//arrays for category Menu
 var arrayWithTypes: [TypeFor] = []
+
+//var arrayWithDeletedTypes: [TypeFor] = []
