@@ -35,9 +35,8 @@ class APICaller {
         }
         task.resume()
     }
-    
     public func searchStories(title: String, completion: @escaping (Result<[Article], Error>) -> Void) {
-        guard let url = URL(string: "https://newsapi.org/v2/everything?q=\(title)\(APIProperty.shared.apiKey)") else { return }
+        guard let url = URL(string: "\(APIProperty.shared.forSearchLink)\(title.addingPercentEncoding( withAllowedCharacters: .urlQueryAllowed) ?? "")\(APIProperty.shared.apiKey)") else { return }
         
         let task = URLSession.shared.dataTask(with:  url) { data, response, error in
             if let error = error {

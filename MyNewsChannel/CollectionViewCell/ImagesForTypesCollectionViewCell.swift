@@ -14,7 +14,6 @@ class ImagesForTypesCollectionViewCell: UICollectionViewCell {
     var isSelectedCell: Bool = false {
         didSet {
             self.contentView.tintColor = isSelectedCell ? .black : .systemGray3
-            
         }
     }
     
@@ -41,6 +40,5 @@ class ImagesForTypesCollectionViewCell: UICollectionViewCell {
         iconImageView.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
         
     }
-    
     
 }

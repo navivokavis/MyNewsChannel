@@ -1,0 +1,44 @@
+/* 
+  Localizable.strings
+  MyNewsChannel
+
+  Created by Navi Vokavis on 1.11.22.
+  
+*/
+
+// MARK: - NewsType
+
+"Ukraine" = "Ukraine";
+"War" = "War";
+"Business" = "Business";
+"Entertainment" = "Entertainment";
+"Health" = "Health";
+"Science" = "Science";
+"Sports" = "Sports";
+"Architecture" = "Architecture";
+"Fashion" = "Fashion";
+"Technology" = "Technology";
+"Covid-19" = "Covid-19";
+
+// MARK: - Menu
+
+"Change Category" = "Change Category";
+
+// MARK: - MainPageStrings
+
+"Top Rated News" = "Top Rated News";
+"news" = "news";
+
+// MARK: - Search
+
+"Search" = "Search";
+
+// MARK: - Settings
+
+"Settings" = "Settings";
+"Add your category" = "Add your category";
+"Input search keyword" = "Input search keyword";
+
+// MARK: - LanguagePicker
+
+"Done" = "Done";

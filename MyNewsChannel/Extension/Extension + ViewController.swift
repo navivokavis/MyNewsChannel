@@ -75,9 +75,19 @@ extension MainViewController {
         aletrController.addAction(search)
         aletrController.addAction(cancel)
         present(aletrController, animated: true)
-        
-        
-        
-        
     }
+}
+
+
+//MARK: - String extension
+
+extension String {
+    func localized(lang:String) ->String {
+        
+        let path = Bundle.main.path(forResource: lang, ofType: "lproj")
+        let bundle = Bundle(path: path!)
+        
+        return NSLocalizedString(self, tableName: nil, bundle: bundle!, value: "", comment: "")
+    }
+    
 }

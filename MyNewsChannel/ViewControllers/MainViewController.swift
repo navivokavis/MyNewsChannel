@@ -8,7 +8,7 @@
 import UIKit
 import SafariServices
 
-class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MainViewController: UIViewController {
     
     let newsTableView = UITableView()
     private var viewModels = [NewsTableViewCellViewModel]()
@@ -18,6 +18,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     var backbutton = UIBarButtonItem()
     var setingsButton = UIBarButtonItem()
     var splashView = SplashView()
+    var refresh = UIRefreshControl()
     
     //Create UIMenu with ENUM
     //    var categoryMenu: UIMenu {
@@ -47,8 +48,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         menuLeftButton.menu = setupUIMenu()
+        apicaller()
+        title = LocalizedString.MainPage.title
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -63,14 +66,16 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func buildHierarchy() {
         view.addSubview(newsTableView)
         view.addSubview(splashView)
+        newsTableView.addSubview(refresh)
     }
     
     func configureSubviews() {
-        title = "Top Rated News"
         
         self.navigationController?.setupNavigationController()
         self.navigationController!.navigationBar.tintColor = .white
         self.navigationController?.navigationBar.alpha = 0
+        
+        self.refresh.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         
         setingsButton = createCustomBarButton(imageName: "square.and.pencil", selector: #selector(setingsButtonTapped))
         searchRightButton = createCustomBarButton(imageName: "magnifyingglass", selector: #selector(searchRightButtonTapped))
@@ -85,8 +90,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         newsTableView.register(NewsTableViewCell.self, forCellReuseIdentifier: NewsTableViewCell.identifier)
         newsTableView.delegate = self
         newsTableView.dataSource = self
-        
-        apicaller()
         
         UIView.animate(withDuration: 1, delay: 2.5) {
             self.splashView.alpha = 0
@@ -142,14 +145,21 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
             menuActions.append(action)
         }
-        return UIMenu(title: "Change Category", children: menuActions)
+        return UIMenu(title: LocalizedString.UIMenu.titleMenu, children: menuActions)
+    }
+    
+    //MARK: - Handle Refresh
+    
+    @objc func handleRefresh() {
+        apicaller()
+        newsTableView.reloadData()
+        refresh.endRefreshing()
     }
     
     //MARK: - Setings Button Tapped
     
     @objc func setingsButtonTapped() {
         let vc = SettingsViewController()
-        
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -210,7 +220,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 DispatchQueue.main.async {
                     self?.newsTableView.reloadData()
                     self?.backbutton.customView?.isHidden = true
-                    self?.title = "Top Rated News"
+                    self?.title = LocalizedString.MainPage.title
                 }
             case.failure( let error ):
                 print("I have Error \(error)")
@@ -235,7 +245,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 })
                 DispatchQueue.main.async {
                     self?.newsTableView.reloadData()
-                    self?.title = "\(title) news"
+                    self?.title = "\(title) \(LocalizedString.MainPage.newsWithCategory)"
                     self?.backbutton.customView?.isHidden = false
                 }
             case.failure( let error ):
@@ -259,7 +269,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
                 })
                 DispatchQueue.main.async {
                     self?.newsTableView.reloadData()
-                    self?.title = "\(type) news"
+                    self?.title = "\(type) \(LocalizedString.MainPage.newsWithCategory)"
                     self?.backbutton.customView?.isHidden = false
                 }
             case.failure( let error ):
@@ -267,8 +277,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
     }
-    
-    //MARK: - TableView Delegate and DataSource
+}
+
+
+//MARK: - TableView Delegate and DataSource
+extension MainViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModels.count
@@ -308,13 +321,14 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         var heightForRow: CGFloat = 0
-        if indexPath.row < 1 {
+        if indexPath.row == 0 {
             heightForRow = 350
         }
-        if indexPath.row > 1 {
+        if indexPath.row >= 1 {
             heightForRow = 150
         }
         return heightForRow
     }
     
 }
+

@@ -5,6 +5,8 @@
 //  Created by Navi Vokavis on 27.10.22.
 //
 
+//MARK: - This View Controller don't work
+
 import UIKit
 
 class WrongViewController: UIViewController {

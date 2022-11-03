@@ -12,9 +12,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        arrayWithTypes = NewsType.allCases.map({ type in
-            return TypeFor.init(typeName: type.rawValue, typeImage: type.systemName)
-        })
+        if let array = UserDefaultsModel.getArray() {
+            arrayWithTypes = array
+        } else {
+            arrayWithTypes = NewsType.allCases.map({ type in
+                return TypeFor.init(typeName: NewsType.getTitleFor(title: type), typeImage: type.systemName)
+            })
+        }
+        
         return true
     }
 

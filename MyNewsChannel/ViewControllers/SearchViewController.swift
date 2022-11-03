@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchViewController: UIViewController, UISearchBarDelegate {
+class SearchViewController: UIViewController {
     
     // объявил замыкание
     public var completion: ((String) -> Void)?
@@ -20,7 +20,8 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .black
-        title = "Search"
+        title = LocalizedString.SearchPage.title
+//        title = defaultLocalizer.stringForKey(key: "Search")
         
         navigationItem.searchController = searchController
         navigationController?.navigationBar.barStyle = .black
@@ -29,8 +30,10 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         searchBar.showsCancelButton = true
         searchBar.becomeFirstResponder()
     }
-    
-    //MARK: - Search
+}
+
+//MARK: - SearchBar Delegate
+extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         print(searchText)
     }
@@ -46,5 +49,4 @@ class SearchViewController: UIViewController, UISearchBarDelegate {
         self.completion?(self.txt)
         self.navigationController?.popViewController(animated: true)
     }
-    
 }

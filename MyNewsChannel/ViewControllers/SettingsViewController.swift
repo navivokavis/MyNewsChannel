@@ -7,13 +7,13 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class SettingsViewController: UIViewController {
     
     var typeTableView = UITableView()
-    var tapToChangeButton = UIButton()
-    var smallMenuToChangeView = UIView()
+    var smallSettingsMenuButton = UIButton()
+    var smallSettingsMenuView = UIView()
     var addTypeNewsButton = UIButton()
-    var cancelChangesButton = UIButton()
+    var initialSettingsButton = UIButton()
     var changeLanguageButton = UIButton()
     var transparentView = UIView()
     var addTypeView = UIView()
@@ -45,11 +45,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func buildHierarchy() {
         view.addSubview(typeTableView)
-        view.addSubview(tapToChangeButton)
-        view.addSubview(smallMenuToChangeView)
-        smallMenuToChangeView.addSubview(addTypeNewsButton)
-        smallMenuToChangeView.addSubview(cancelChangesButton)
-        smallMenuToChangeView.addSubview(changeLanguageButton)
+        view.addSubview(smallSettingsMenuButton)
+        view.addSubview(smallSettingsMenuView)
+        smallSettingsMenuView.addSubview(addTypeNewsButton)
+        smallSettingsMenuView.addSubview(initialSettingsButton)
+        smallSettingsMenuView.addSubview(changeLanguageButton)
         view.addSubview(addTypeView)
         addTypeView.addSubview(addTypeLabel)
         addTypeView.addSubview(addTypeTextField)
@@ -59,26 +59,26 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func configureSubviews() {
         view.backgroundColor = .white
-        title = "Settings"
+        title = LocalizedString.SettingsPage.title
         
         typeTableView.register(TypesTableViewCell.self, forCellReuseIdentifier: TypesTableViewCell.identifier)
         typeTableView.delegate = self
         typeTableView.dataSource = self
         
-        tapToChangeButton.setImage(UIImage(systemName: "list.bullet.circle.fill"), for: .normal)
-        tapToChangeButton.backgroundColor = .systemBackground
-        tapToChangeButton.layer.cornerRadius = 30
-        tapToChangeButton.contentVerticalAlignment = .fill
-        tapToChangeButton.contentHorizontalAlignment = .fill
-        tapToChangeButton.imageView?.tintColor = .black
-        tapToChangeButton.addTarget(self, action: #selector(systemButtonTapped), for: .touchUpInside)
+        smallSettingsMenuButton.setImage(UIImage(systemName: "list.bullet.circle.fill"), for: .normal)
+        smallSettingsMenuButton.backgroundColor = .systemBackground
+        smallSettingsMenuButton.layer.cornerRadius = 30
+        smallSettingsMenuButton.contentVerticalAlignment = .fill
+        smallSettingsMenuButton.contentHorizontalAlignment = .fill
+        smallSettingsMenuButton.imageView?.tintColor = .black
+        smallSettingsMenuButton.addTarget(self, action: #selector(smallSettingsMenuTapped), for: .touchUpInside)
         
-        smallMenuToChangeView.backgroundColor = .systemBackground
-        smallMenuToChangeView.layer.borderWidth = 1
-        smallMenuToChangeView.layer.borderColor = UIColor.systemGray5.cgColor
-        smallMenuToChangeView.layer.cornerRadius = 20
-        smallMenuToChangeView.alpha = 0
-        smallMenuToChangeView.transform = CGAffineTransform(translationX: 20, y: 0)
+        smallSettingsMenuView.backgroundColor = .systemBackground
+        smallSettingsMenuView.layer.borderWidth = 1
+        smallSettingsMenuView.layer.borderColor = UIColor.systemGray5.cgColor
+        smallSettingsMenuView.layer.cornerRadius = 20
+        smallSettingsMenuView.alpha = 0
+        smallSettingsMenuView.transform = CGAffineTransform(translationX: 20, y: 0)
         
         addTypeNewsButton.setImage(UIImage(systemName: "plus.circle"), for: .normal)
         addTypeNewsButton.contentVerticalAlignment = .fill
@@ -87,27 +87,29 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         addTypeNewsButton.isEnabled = false
         addTypeNewsButton.imageView?.tintColor = .systemGray5
         
-        cancelChangesButton.setImage(UIImage(systemName: "clock.arrow.circlepath"), for: .normal)
-        cancelChangesButton.contentVerticalAlignment = .fill
-        cancelChangesButton.contentHorizontalAlignment = .fill
-        cancelChangesButton.isEnabled = false
-        cancelChangesButton.imageView?.tintColor = .systemGray5
+        initialSettingsButton.setImage(UIImage(systemName: "clock.arrow.circlepath"), for: .normal)
+        initialSettingsButton.contentVerticalAlignment = .fill
+        initialSettingsButton.contentHorizontalAlignment = .fill
+        initialSettingsButton.isEnabled = false
+        initialSettingsButton.imageView?.tintColor = .systemGray5
+        initialSettingsButton.addTarget(self, action: #selector(initialSettingsButtonTapped), for: .touchUpInside)
         
         changeLanguageButton.setImage(UIImage(systemName: "globe"), for: .normal)
         changeLanguageButton.contentVerticalAlignment = .fill
         changeLanguageButton.contentHorizontalAlignment = .fill
         changeLanguageButton.imageView?.tintColor = .systemGray
+        changeLanguageButton.addTarget(self, action: #selector(changeLanguageButtonTapped), for: .touchUpInside)
         
         addTypeView.backgroundColor = .systemBackground
         addTypeView.layer.cornerRadius = 20
         
-        addTypeLabel.text = "Add your category"
+        addTypeLabel.text = LocalizedString.SettingsPage.inputTextLabel
         addTypeLabel.textAlignment = .center
         
         addTypeTextField.backgroundColor = .systemGray5
         addTypeTextField.layer.cornerRadius = 5
         addTypeTextField.textAlignment = .center
-        addTypeTextField.placeholder = "Input search keyword"
+        addTypeTextField.placeholder = LocalizedString.SettingsPage.inputTextField
         addTypeTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
         
         let layout = UICollectionViewFlowLayout()
@@ -138,38 +140,39 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     func layoutSubviews() {
-        tapToChangeButton.translatesAutoresizingMaskIntoConstraints = false
-        tapToChangeButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        tapToChangeButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
-        tapToChangeButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60).isActive = true
-        tapToChangeButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
+        smallSettingsMenuButton.translatesAutoresizingMaskIntoConstraints = false
+        smallSettingsMenuButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        smallSettingsMenuButton.widthAnchor.constraint(equalToConstant: 50).isActive = true
+        smallSettingsMenuButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60).isActive = true
+        smallSettingsMenuButton.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -40).isActive = true
         
-        smallMenuToChangeView.translatesAutoresizingMaskIntoConstraints = false
-        smallMenuToChangeView.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        smallMenuToChangeView.widthAnchor.constraint(equalToConstant: 160).isActive = true
-        smallMenuToChangeView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60).isActive = true
-        smallMenuToChangeView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -90).isActive = true
+        smallSettingsMenuView.translatesAutoresizingMaskIntoConstraints = false
+        smallSettingsMenuView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        smallSettingsMenuView.widthAnchor.constraint(equalToConstant: 160).isActive = true
+        smallSettingsMenuView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -60).isActive = true
+        smallSettingsMenuView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -90).isActive = true
         
         addTypeNewsButton.translatesAutoresizingMaskIntoConstraints = false
         addTypeNewsButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         addTypeNewsButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        addTypeNewsButton.bottomAnchor.constraint(equalTo: smallMenuToChangeView.bottomAnchor, constant: -5).isActive = true
-        addTypeNewsButton.leftAnchor.constraint(equalTo: smallMenuToChangeView.leftAnchor, constant: 10).isActive = true
+        addTypeNewsButton.bottomAnchor.constraint(equalTo: smallSettingsMenuView.bottomAnchor, constant: -5).isActive = true
+        addTypeNewsButton.leftAnchor.constraint(equalTo: smallSettingsMenuView.leftAnchor, constant: 10).isActive = true
         
-        cancelChangesButton.translatesAutoresizingMaskIntoConstraints = false
-        cancelChangesButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        cancelChangesButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        cancelChangesButton.bottomAnchor.constraint(equalTo: smallMenuToChangeView.bottomAnchor, constant: -5).isActive = true
-        cancelChangesButton.leftAnchor.constraint(equalTo: addTypeNewsButton.rightAnchor, constant: 10).isActive = true
-        cancelChangesButton.addTarget(self, action: #selector(cancelButtonTapped), for: .touchUpInside)
+        initialSettingsButton.translatesAutoresizingMaskIntoConstraints = false
+        initialSettingsButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        initialSettingsButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        initialSettingsButton.bottomAnchor.constraint(equalTo: smallSettingsMenuView.bottomAnchor, constant: -5).isActive = true
+        initialSettingsButton.leftAnchor.constraint(equalTo: addTypeNewsButton.rightAnchor, constant: 10).isActive = true
         
         changeLanguageButton.translatesAutoresizingMaskIntoConstraints = false
         changeLanguageButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         changeLanguageButton.widthAnchor.constraint(equalToConstant: 40).isActive = true
-        changeLanguageButton.bottomAnchor.constraint(equalTo: smallMenuToChangeView.bottomAnchor, constant: -5).isActive = true
-        changeLanguageButton.leftAnchor.constraint(equalTo: cancelChangesButton.rightAnchor, constant: 10).isActive = true
+        changeLanguageButton.bottomAnchor.constraint(equalTo: smallSettingsMenuView.bottomAnchor, constant: -5).isActive = true
+        changeLanguageButton.leftAnchor.constraint(equalTo: initialSettingsButton.rightAnchor, constant: 10).isActive = true
         
     }
+    
+    //MARK: - Constraint for view with input TextField and collectionView
     
     func ConstrainTransparendViewIsVisible() {
         
@@ -213,20 +216,21 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     
     //MARK: - Check Active Button
     func changeColorAndActivityOfButton() {
-        if arrayWithTypes.count == 11 {
-            addTypeNewsButton.isEnabled = false
-            addTypeNewsButton.imageView?.tintColor = .systemFill
-            cancelChangesButton.isEnabled = false
-            cancelChangesButton.imageView?.tintColor = .systemFill
-        } else {
+        if arrayWithTypes.count < 11 {
             addTypeNewsButton.isEnabled = true
             addTypeNewsButton.imageView?.tintColor = .systemGreen
-            cancelChangesButton.isEnabled = true
-            cancelChangesButton.imageView?.tintColor = .systemBlue
+            initialSettingsButton.isEnabled = true
+            initialSettingsButton.imageView?.tintColor = .systemBlue
+            
+        } else {
+            addTypeNewsButton.isEnabled = false
+            addTypeNewsButton.imageView?.tintColor = .systemFill
+            initialSettingsButton.isEnabled = false
+            initialSettingsButton.imageView?.tintColor = .systemFill
         }
     }
     
-    //MARK: - Transperend View
+    //MARK: - Transperend View with input TextField and collectionView
     
     func addTransparentView() {
         view.addSubview(transparentView)
@@ -259,31 +263,63 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         }, completion: nil)
     }
     
-    //MARK: - @objc functions
+    //MARK: - @objc functions Small Settings Menu
     
-    @objc func systemButtonTapped() {
-        self.smallMenuToChangeView.alpha == 0 ?
-        UIView.transition(with: smallMenuToChangeView, duration: 0.3) {
-            self.smallMenuToChangeView.alpha = 1
-            self.smallMenuToChangeView.transform = CGAffineTransform(translationX: 0, y: 0)
-        } : UIView.transition(with: smallMenuToChangeView, duration: 0.3) {
-            self.smallMenuToChangeView.alpha = 0
-            self.smallMenuToChangeView.transform = CGAffineTransform(translationX: 20, y: 0)
+    @objc func smallSettingsMenuTapped() {
+        changeColorAndActivityOfButton()
+        self.smallSettingsMenuView.alpha == 0 ?
+        UIView.transition(with: smallSettingsMenuView, duration: 0.3) {
+            self.smallSettingsMenuView.alpha = 1
+            self.smallSettingsMenuView.transform = CGAffineTransform(translationX: 0, y: 0)
+        } : UIView.transition(with: smallSettingsMenuView, duration: 0.3) {
+            self.smallSettingsMenuView.alpha = 0
+            self.smallSettingsMenuView.transform = CGAffineTransform(translationX: 20, y: 0)
         }
+        //choice image in collection view dont work
+//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped))
+//        view.addGestureRecognizer(tapGestureRecognizer)
     }
+    
+//    @objc func backgroundTapped() {
+//        UIView.transition(with: view, duration: 0.3) {
+//            self.smallSettingsMenuView.alpha = 0
+//            self.smallSettingsMenuView.transform = CGAffineTransform(translationX: 20, y: 0)
+//        }
+//    }
+    
+    //MARK: - @objc functions add Button
     
     @objc func addButtonTapped() {
         addTransparentView()
     }
     
-    @objc func cancelButtonTapped() {
+    //MARK: - @objc functions initial settings Button
+    
+    @objc func initialSettingsButtonTapped() {
         arrayWithTypes.removeAll()
         arrayWithTypes = NewsType.allCases.map({ type in
             return TypeFor.init(typeName: type.rawValue, typeImage: type.systemName)
         })
+        UserDefaultsModel.saveArray(arrayWithTypes)
         typeTableView.reloadData()
         changeColorAndActivityOfButton()
     }
+    
+    //MARK: - @objc functions Change Language Button
+    
+    @objc func changeLanguageButtonTapped() {
+        //        let languageViewController = LanguageViewController()
+        //        languageViewController.transitioningDelegate  = languageViewController.overlayTransitioningDelegate
+        //        languageViewController.modalPresentationStyle = .custom
+        //        self.present(languageViewController, animated: true, completion: nil)
+        
+        //open phone settings
+        if let appSettings = URL(string: UIApplication.openSettingsURLString), UIApplication.shared.canOpenURL(appSettings) {
+            UIApplication.shared.open(appSettings)
+        }
+    }
+    
+    //MARK: - @objc functions text change check
     
     @objc func textDidChange() {
         guard let text = addTypeTextField.text,
@@ -292,6 +328,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         okButton.isEnabled = text.count > 2 ? true : false
     }
     
+    //MARK: - @objc functions add new Category
+    
     @objc func addNewType() {
         if let text = addTypeTextField.text,
            text != "",
@@ -299,6 +337,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
            let image = selectedImage {
             let typeStruct = TypeFor(typeName: text, typeImage: image)
             arrayWithTypes.append(typeStruct)
+            UserDefaultsModel.saveArray(arrayWithTypes)
             typeTableView.reloadData()
             removeTransparentView()
             
@@ -313,9 +352,11 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
-    
-    //MARK: - TableView Delegate and DataSource
-    
+}
+
+//MARK: - TableView Delegate and DataSource
+
+extension SettingsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return arrayWithTypes.count
     }
@@ -350,13 +391,17 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { action, indexPath in
             arrayWithTypes.remove(at: indexPath.row)
+            UserDefaultsModel.saveArray(arrayWithTypes)
             self.typeTableView.deleteRows(at: [indexPath], with: .automatic)
             self.changeColorAndActivityOfButton()
         }
         return [deleteAction]
     }
-    
-    //MARK: - Collerction View Delegate and DataSource
+}
+
+//MARK: - Collerction View Delegate and DataSource
+
+extension SettingsViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         Pictures.allCases.count
@@ -388,7 +433,7 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         } else {
             cell.contentView.tintColor = .systemGray3
         }
-
+        
         textDidChange()
         
     }
@@ -404,9 +449,8 @@ class SettingsViewController: UIViewController, UITableViewDelegate, UITableView
         } else {
             cell.contentView.tintColor = .systemGray3
         }
-
+        
         textDidChange()
     }
     
 }
-

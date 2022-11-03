@@ -95,6 +95,7 @@ class FirstNewsTableViewCell: UITableViewCell {
         newsSubtitleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 15).isActive = true
         newsSubtitleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -15).isActive = true
         newsSubtitleLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
+//        newsSubtitleLabel.heightAnchor.constraint(equalToConstant: 150).isActive = true
         
         publishedDateLabel.translatesAutoresizingMaskIntoConstraints = false
         publishedDateLabel.heightAnchor.constraint(equalToConstant: 25).isActive = true
@@ -113,10 +114,26 @@ class FirstNewsTableViewCell: UITableViewCell {
         publishedDateLabel.text = nil
     }
     
+    func convertDateToString(stringDate: String) -> String {
+        
+        let formatter: ISO8601DateFormatter = .init()
+        
+        let rawDate = formatter.date(from: stringDate)
+        
+        let form: DateFormatter = .init()
+        form.dateFormat = "yyyy MMM dd HH:mm"
+        
+        let finalString = form.string(from: rawDate!)
+        
+        return finalString
+    }
+    
     func configure(with viewModel: NewsTableViewCellViewModel) {
         newsTitleLabel.text = viewModel.title
         newsSubtitleLabel.text = viewModel.subtitle
 //                publishedDateLabel.text = viewModel.published
+        publishedDateLabel.text = convertDateToString(stringDate: viewModel.published)
+
         if let data = viewModel.imageData {
             newsImageView.image = UIImage(data: data)
         } else if let url = viewModel.imageURL {

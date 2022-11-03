@@ -14,11 +14,15 @@
 		F03EC5DB290BDEF7008FBE5F /* TypesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03EC5DA290BDEF7008FBE5F /* TypesTableViewCell.swift */; };
 		F03EC5DD290BF06A008FBE5F /* Variables.swift in Sources */ = {isa = PBXBuildFile; fileRef = F03EC5DC290BF06A008FBE5F /* Variables.swift */; };
 		F05FEDD229084B0000268479 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05FEDD129084B0000268479 /* SplashView.swift */; };
+		F063E4282912C5150067AC6C /* AMPLocalizeUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F063E4272912C5150067AC6C /* AMPLocalizeUtils.swift */; };
 		F087C28928FF1CF800310A38 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = F087C28828FF1CF800310A38 /* Models.swift */; };
 		F087C29A290049F800310A38 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F087C299290049F800310A38 /* Constant.swift */; };
-		F0884E452904944300DD17C5 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0884E442904944300DD17C5 /* SplashViewController.swift */; };
 		F0884E4A29056CB300DD17C5 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0884E4929056CB300DD17C5 /* SearchViewController.swift */; };
 		F08EDB4C290DD2E100C7C9F9 /* ImagesForTypesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08EDB4B290DD2E100C7C9F9 /* ImagesForTypesCollectionViewCell.swift */; };
+		F08EDB4E2911240D00C7C9F9 /* UserDefaultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08EDB4D2911240D00C7C9F9 /* UserDefaultModel.swift */; };
+		F08EDB5029116B8200C7C9F9 /* LanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08EDB4F29116B8200C7C9F9 /* LanguageViewController.swift */; };
+		F08EDB5429119A0200C7C9F9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F08EDB5629119A0200C7C9F9 /* Localizable.strings */; };
+		F08EDB5B29119BFD00C7C9F9 /* LocalizedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = F08EDB5A29119BFD00C7C9F9 /* LocalizedString.swift */; };
 		F0B65D3528FE88250087E6ED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B65D3428FE88250087E6ED /* AppDelegate.swift */; };
 		F0B65D3728FE88250087E6ED /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B65D3628FE88250087E6ED /* SceneDelegate.swift */; };
 		F0B65D3928FE88250087E6ED /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0B65D3828FE88250087E6ED /* MainViewController.swift */; };
@@ -38,11 +42,18 @@
 		F03EC5DA290BDEF7008FBE5F /* TypesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypesTableViewCell.swift; sourceTree = "<group>"; };
 		F03EC5DC290BF06A008FBE5F /* Variables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variables.swift; sourceTree = "<group>"; };
 		F05FEDD129084B0000268479 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		F063E4272912C5150067AC6C /* AMPLocalizeUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AMPLocalizeUtils.swift; sourceTree = "<group>"; };
 		F087C28828FF1CF800310A38 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		F087C299290049F800310A38 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
-		F0884E442904944300DD17C5 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		F0884E4929056CB300DD17C5 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		F08EDB4B290DD2E100C7C9F9 /* ImagesForTypesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesForTypesCollectionViewCell.swift; sourceTree = "<group>"; };
+		F08EDB4D2911240D00C7C9F9 /* UserDefaultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultModel.swift; sourceTree = "<group>"; };
+		F08EDB4F29116B8200C7C9F9 /* LanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageViewController.swift; sourceTree = "<group>"; };
+		F08EDB5529119A0200C7C9F9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F08EDB5729119A4200C7C9F9 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F08EDB5829119A5200C7C9F9 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F08EDB5929119A6600C7C9F9 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F08EDB5A29119BFD00C7C9F9 /* LocalizedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedString.swift; sourceTree = "<group>"; };
 		F0B65D3128FE88250087E6ED /* MyNewsChannel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyNewsChannel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0B65D3428FE88250087E6ED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F0B65D3628FE88250087E6ED /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,9 +94,26 @@
 			path = Constant;
 			sourceTree = "<group>";
 		};
+		F063E4292913E3A60067AC6C /* CollectionViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				F08EDB4B290DD2E100C7C9F9 /* ImagesForTypesCollectionViewCell.swift */,
+			);
+			path = CollectionViewCell;
+			sourceTree = "<group>";
+		};
+		F063E42A2913E3EA0067AC6C /* Variables */ = {
+			isa = PBXGroup;
+			children = (
+				F03EC5DC290BF06A008FBE5F /* Variables.swift */,
+			);
+			path = Variables;
+			sourceTree = "<group>";
+		};
 		F087C28A28FF27A200310A38 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F08EDB4D2911240D00C7C9F9 /* UserDefaultModel.swift */,
 				F087C28828FF1CF800310A38 /* Models.swift */,
 				F03EC5D6290BDA5A008FBE5F /* TypeModel.swift */,
 			);
@@ -99,6 +127,7 @@
 				F03EC5D4290B0947008FBE5F /* WrongViewController.swift */,
 				F0884E4929056CB300DD17C5 /* SearchViewController.swift */,
 				F03EC5D8290BDDB1008FBE5F /* SettingsViewController.swift */,
+				F08EDB4F29116B8200C7C9F9 /* LanguageViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -122,19 +151,21 @@
 		F087C28E28FF281900310A38 /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				F0B65D4C28FEC6AE0087E6ED /* NewsTableViewCell.swift */,
 				F03EC5D2290AC654008FBE5F /* FirstNewsTableViewCell.swift */,
+				F0B65D4C28FEC6AE0087E6ED /* NewsTableViewCell.swift */,
 				F03EC5DA290BDEF7008FBE5F /* TypesTableViewCell.swift */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
 		};
-		F0884E482904988C00DD17C5 /* Splash */ = {
+		F08EDB51291198FE00C7C9F9 /* Localizables */ = {
 			isa = PBXGroup;
 			children = (
-				F0884E442904944300DD17C5 /* SplashViewController.swift */,
+				F08EDB5629119A0200C7C9F9 /* Localizable.strings */,
+				F08EDB5A29119BFD00C7C9F9 /* LocalizedString.swift */,
+				F063E4272912C5150067AC6C /* AMPLocalizeUtils.swift */,
 			);
-			path = Splash;
+			path = Localizables;
 			sourceTree = "<group>";
 		};
 		F0B65D2828FE88250087E6ED = {
@@ -156,12 +187,12 @@
 		F0B65D3328FE88250087E6ED /* MyNewsChannel */ = {
 			isa = PBXGroup;
 			children = (
-				F08EDB4B290DD2E100C7C9F9 /* ImagesForTypesCollectionViewCell.swift */,
+				F08EDB51291198FE00C7C9F9 /* Localizables */,
+				F063E4292913E3A60067AC6C /* CollectionViewCell */,
 				F0B65D3428FE88250087E6ED /* AppDelegate.swift */,
 				F0B65D3628FE88250087E6ED /* SceneDelegate.swift */,
-				F03EC5DC290BF06A008FBE5F /* Variables.swift */,
+				F063E42A2913E3EA0067AC6C /* Variables */,
 				F05FEDD4290859CE00268479 /* Constant */,
-				F0884E482904988C00DD17C5 /* Splash */,
 				F087C28E28FF281900310A38 /* TableViewCell */,
 				F087C28B28FF27B500310A38 /* ViewControllers */,
 				F05FEDD3290859B100268479 /* Views */,
@@ -218,6 +249,9 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
+				it,
+				es,
 			);
 			mainGroup = F0B65D2828FE88250087E6ED;
 			productRefGroup = F0B65D3228FE88250087E6ED /* Products */;
@@ -235,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0B65D4128FE88270087E6ED /* LaunchScreen.storyboard in Resources */,
+				F08EDB5429119A0200C7C9F9 /* Localizable.strings in Resources */,
 				F0B65D3E28FE88270087E6ED /* Assets.xcassets in Resources */,
 				F0B65D3C28FE88250087E6ED /* Main.storyboard in Resources */,
 			);
@@ -252,17 +287,20 @@
 				F0B65D3528FE88250087E6ED /* AppDelegate.swift in Sources */,
 				F0B65D4D28FEC6AE0087E6ED /* NewsTableViewCell.swift in Sources */,
 				F087C29A290049F800310A38 /* Constant.swift in Sources */,
-				F0884E452904944300DD17C5 /* SplashViewController.swift in Sources */,
+				F063E4282912C5150067AC6C /* AMPLocalizeUtils.swift in Sources */,
 				F0B65D3728FE88250087E6ED /* SceneDelegate.swift in Sources */,
 				F03EC5D3290AC654008FBE5F /* FirstNewsTableViewCell.swift in Sources */,
 				F08EDB4C290DD2E100C7C9F9 /* ImagesForTypesCollectionViewCell.swift in Sources */,
 				F03EC5DD290BF06A008FBE5F /* Variables.swift in Sources */,
+				F08EDB5029116B8200C7C9F9 /* LanguageViewController.swift in Sources */,
 				F087C28928FF1CF800310A38 /* Models.swift in Sources */,
 				F03EC5D5290B0947008FBE5F /* WrongViewController.swift in Sources */,
 				F05FEDD229084B0000268479 /* SplashView.swift in Sources */,
 				F03EC5DB290BDEF7008FBE5F /* TypesTableViewCell.swift in Sources */,
 				F03EC5D7290BDA5A008FBE5F /* TypeModel.swift in Sources */,
 				F0B65D4B28FEB46E0087E6ED /* APICaller.swift in Sources */,
+				F08EDB5B29119BFD00C7C9F9 /* LocalizedString.swift in Sources */,
+				F08EDB4E2911240D00C7C9F9 /* UserDefaultModel.swift in Sources */,
 				F0B65D4928FE8AAE0087E6ED /* Extension + ViewController.swift in Sources */,
 				F03EC5D9290BDDB1008FBE5F /* SettingsViewController.swift in Sources */,
 			);
@@ -271,6 +309,17 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		F08EDB5629119A0200C7C9F9 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F08EDB5529119A0200C7C9F9 /* en */,
+				F08EDB5729119A4200C7C9F9 /* ru */,
+				F08EDB5829119A5200C7C9F9 /* it */,
+				F08EDB5929119A6600C7C9F9 /* es */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		F0B65D3A28FE88250087E6ED /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -294,6 +343,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -354,6 +404,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";

@@ -26,8 +26,6 @@ class TypesTableViewCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        
-        
     }
 
 }

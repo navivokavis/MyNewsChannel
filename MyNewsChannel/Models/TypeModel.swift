@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct TypeFor {
+struct TypeFor: Codable {
     
     var typeName: String
     var typeImage: String
