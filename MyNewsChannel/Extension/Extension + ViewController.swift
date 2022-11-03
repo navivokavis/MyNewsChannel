@@ -29,8 +29,26 @@ extension UINavigationController {
         self.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         self.setStatusBar(backgroundColor: .black)
         self.navigationBar.prefersLargeTitles = true
-        self.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
-        self.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+//        self.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+//        self.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        self.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 30)]
+    }
+    
+    func setupNavigationMultilineTitle() {
+        guard let navigationBar = self.navigationController?.navigationBar else { return }
+        for sview in navigationBar.subviews {
+            for ssview in sview.subviews {
+                guard let label = ssview as? UILabel else { break }
+                if label.text == self.title {
+                    label.numberOfLines = 0
+                    label.lineBreakMode = .byWordWrapping
+                    label.sizeToFit()
+                    UIView.animate(withDuration: 0.3, animations: {
+                        navigationBar.frame.size.height = 57 + label.frame.height
+                    })
+                }
+            }
+        }
     }
     
 }
@@ -57,7 +75,7 @@ extension UIViewController {
   
 }
 
-//MARK: - Create alert controller
+//MARK: - Create alert controller --- Don't anable in this add
 extension MainViewController {
     func presentSearchAlertController(withTitle title: String?, message: String?, style: UIAlertController.Style, completionHandler: @escaping (String) -> Void) {
         let aletrController = UIAlertController(title: title, message: message, preferredStyle: style)

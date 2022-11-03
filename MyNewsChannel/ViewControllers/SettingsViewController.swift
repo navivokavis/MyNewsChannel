@@ -111,6 +111,7 @@ class SettingsViewController: UIViewController {
         addTypeTextField.textAlignment = .center
         addTypeTextField.placeholder = LocalizedString.SettingsPage.inputTextField
         addTypeTextField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        self.addTypeTextField.delegate = self
         
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -137,6 +138,7 @@ class SettingsViewController: UIViewController {
             let name = pictures.image
             return name
         }
+        
     }
     
     func layoutSubviews() {
@@ -184,7 +186,7 @@ class SettingsViewController: UIViewController {
         
         addTypeLabel.translatesAutoresizingMaskIntoConstraints = false
         addTypeLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        addTypeLabel.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        addTypeLabel.widthAnchor.constraint(equalToConstant: 300).isActive = true
         addTypeLabel.centerXAnchor.constraint(equalTo: addTypeView.centerXAnchor, constant: 0).isActive = true
         addTypeLabel.bottomAnchor.constraint(equalTo: addTypeTextField.topAnchor, constant: -5).isActive = true
         
@@ -265,6 +267,8 @@ class SettingsViewController: UIViewController {
     
     //MARK: - @objc functions Small Settings Menu
     
+    
+    
     @objc func smallSettingsMenuTapped() {
         changeColorAndActivityOfButton()
         self.smallSettingsMenuView.alpha == 0 ?
@@ -276,16 +280,20 @@ class SettingsViewController: UIViewController {
             self.smallSettingsMenuView.transform = CGAffineTransform(translationX: 20, y: 0)
         }
         //choice image in collection view dont work
-//        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped))
-//        view.addGestureRecognizer(tapGestureRecognizer)
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped))
+        
+        // это свойство не распространяется на другие вью
+        tapGestureRecognizer.cancelsTouchesInView = false
+        
+        view.addGestureRecognizer(tapGestureRecognizer)
     }
     
-//    @objc func backgroundTapped() {
-//        UIView.transition(with: view, duration: 0.3) {
-//            self.smallSettingsMenuView.alpha = 0
-//            self.smallSettingsMenuView.transform = CGAffineTransform(translationX: 20, y: 0)
-//        }
-//    }
+    @objc func backgroundTapped() {
+        UIView.transition(with: view, duration: 0.3) {
+            self.smallSettingsMenuView.alpha = 0
+            self.smallSettingsMenuView.transform = CGAffineTransform(translationX: 20, y: 0)
+        }
+    }
     
     //MARK: - @objc functions add Button
     
@@ -298,7 +306,7 @@ class SettingsViewController: UIViewController {
     @objc func initialSettingsButtonTapped() {
         arrayWithTypes.removeAll()
         arrayWithTypes = NewsType.allCases.map({ type in
-            return TypeFor.init(typeName: type.rawValue, typeImage: type.systemName)
+            return TypeFor.init(typeName: NewsType.getTitleFor(title: type), typeImage: type.systemName)
         })
         UserDefaultsModel.saveArray(arrayWithTypes)
         typeTableView.reloadData()
@@ -453,4 +461,11 @@ extension SettingsViewController: UICollectionViewDataSource, UICollectionViewDe
         textDidChange()
     }
     
+}
+
+extension SettingsViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+            self.addTypeTextField.endEditing(true)
+            return false
+        }
 }
