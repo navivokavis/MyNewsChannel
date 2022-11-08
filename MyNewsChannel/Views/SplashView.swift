@@ -63,18 +63,13 @@ class SplashView: UIView {
         
         smallTextImage.transform = CGAffineTransform(translationX: 0, y: 20)
         smallTextImage.alpha = 0
-        
+    
         UIView.animate(withDuration: 2) {
             self.mainTextImage.transform = .identity
             self.mainTextImage.alpha = 1
             self.smallTextImage.transform = .identity
             self.smallTextImage.alpha = 1
         }
-
-//        UIView.animate(withDuration: 1, delay: 2.5) {
-//            self.alpha = 0
-//        }
-        
         
     }
     
