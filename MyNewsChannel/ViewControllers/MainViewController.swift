@@ -3,7 +3,7 @@
 //  MyNewsChannel
 //
 //  Created by Navi Vokavis on 18.10.22.
-//
+// This project remade with RxSwift on 27.11.2022
 
 import UIKit
 import SafariServices
